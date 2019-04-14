@@ -5,11 +5,13 @@
            http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
 
-	<bean class="HelloWorld" id="helloworld"></bean>
+	<bean id="helloworld" class="HelloWorld">
+		<property name="language" value="korean"></property>
+	</bean>
+
 	<bean id="helloworld2" class="HelloWorldFactory"  factory-method="getInstance"></bean>
-	
+
 	<bean id="helloworldfactory" class="HelloWorldFactory2"></bean>
 	<bean id="helloworld3" factory-bean="helloworldfactory" factory-method="getInstance"></bean>
-
 
 </beans>

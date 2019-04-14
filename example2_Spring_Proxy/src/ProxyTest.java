@@ -1,11 +1,17 @@
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-public class ProxyTest {
+import java.lang.reflect.Proxy;
+
+
+public class  ProxyTest {
+
 	@Test
 	public void testProxy(){
 		PersonDao personDao = new PersonDaoImpl();
 		Transaction transaction = new Transaction();
-		PersonDaoProxy proxy = new PersonDaoProxy(personDao, transaction);
-		proxy.savePerson();
+		MyInterceptor myInterceptor = new MyInterceptor(personDao, transaction);
+
+		PersonDao newProxy = (PersonDao)Proxy.newProxyInstance(personDao.getClass().getClassLoader(), personDao.getClass().getInterfaces(), myInterceptor);
+		newProxy.savePerson();
 	}
 }
